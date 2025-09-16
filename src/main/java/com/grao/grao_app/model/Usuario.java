@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 //Porque é uma entidade (Usuários)
 @Entity
-public class usuarios {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
