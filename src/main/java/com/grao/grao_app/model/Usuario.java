@@ -1,9 +1,6 @@
 package com.grao.grao_app.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.grao.grao_app.model.Despesas;
+import jakarta.persistence.*;
 
 //Porque é uma entidade (Usuários)
 @Entity
@@ -15,4 +12,27 @@ public class Usuario {
     private String nome;
     private String email;
 
+    public long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
