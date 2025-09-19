@@ -1,7 +1,6 @@
 package com.grao.grao_app.service;
 
 import java.util.List;
-
 import com.grao.grao_app.model.Receitas;
 import com.grao.grao_app.repository.ReceitasRepository;
 import org.springframework.stereotype.Service;
