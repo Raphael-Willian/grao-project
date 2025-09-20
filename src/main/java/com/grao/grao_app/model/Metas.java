@@ -3,6 +3,7 @@ package com.grao.grao_app.model;
 import com.grao.grao_app.model.Usuario;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -19,8 +20,8 @@ public class Metas {
 
     private String titulo;
     private String descricao;
-    private double valor_objetivo;
-    private double valor_atual;
+    private BigDecimal valor_objetivo;
+    private BigDecimal valor_atual;
     private LocalDate prazo;
     private String status;
     private String categoria;
@@ -59,19 +60,19 @@ public class Metas {
         this.descricao = descricao;
     }
 
-    public double getValor_objetivo() {
+    public BigDecimal getValor_objetivo() {
         return valor_objetivo;
     }
 
-    public void setValor_objetivo(double valor_objetivo) {
+    public void setValor_objetivo(BigDecimal valor_objetivo) {
         this.valor_objetivo = valor_objetivo;
     }
 
-    public double getValor_atual() {
+    public BigDecimal getValor_atual() {
         return valor_atual;
     }
 
-    public void setValor_atual(double valor_atual) {
+    public void setValor_atual(BigDecimal valor_atual) {
         this.valor_atual = valor_atual;
     }
 
