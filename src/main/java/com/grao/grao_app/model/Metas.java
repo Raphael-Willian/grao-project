@@ -1,8 +1,7 @@
 package com.grao.grao_app.model;
 
-import com.grao.grao_app.model.Usuario;
 import jakarta.persistence.*;
-
+import java.util.List;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,6 +26,17 @@ public class Metas {
     private String categoria;
     private LocalDateTime data_criacao;
     private LocalDate data_conclusao;
+
+        @OneToMany(mappedBy = "meta", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<ProgressoMeta> progressoMeta;
+
+    public List<ProgressoMeta> getProgressoMeta() {
+        return progressoMeta;
+    }
+
+    public void setProgressoMeta(List<ProgressoMeta> progressoMeta) {
+        this.progressoMeta = progressoMeta;
+    }
 
     public long getId() {
         return id;
