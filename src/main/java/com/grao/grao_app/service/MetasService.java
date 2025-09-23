@@ -13,12 +13,13 @@ public class MetasService {
     public MetasService(MetasRepository metasRepository) {
         this.metasRepository = metasRepository;
     }
-
     public List<Metas> listarMetas() {
         return metasRepository.findAll();
     }
-
     public Metas adicionarMetas(Metas metas) {
         return metasRepository.save(metas);
+    }
+    public void deletar(Long metaId) {
+        metasRepository.deleteById(metaId);
     }
 }

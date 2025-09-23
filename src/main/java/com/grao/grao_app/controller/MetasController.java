@@ -24,6 +24,10 @@ public class MetasController {
     public Metas salvar(@RequestBody Metas metas) {
         return metasService.adicionarMetas(metas);
     }
+    @DeleteMapping("/{metaId}")
+    public void deletarMeta(@PathVariable Long metaId) {
+        metasService.deletar(metaId);
+    }
 
 
 }
