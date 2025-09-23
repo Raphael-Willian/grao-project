@@ -20,4 +20,7 @@ public class ReceitasService {
     public Receitas adicionar(Receitas receitas) {
         return receitasRepository.save(receitas);
     }
+    public void deletar(Long receitaId) {
+        receitasRepository.deleteById(receitaId);
+    }
 }

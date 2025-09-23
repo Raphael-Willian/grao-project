@@ -23,5 +23,9 @@ public class ReceitasController {
     public Receitas adicionar(@RequestBody Receitas receitas) {
         return receitasService.adicionar(receitas);
     }
+    @DeleteMapping("/{receitaId}")
+    public void deletarReceita(@PathVariable Long receitaId) {
+        receitasService.deletar(receitaId); //A ideia não é retornar nada ainda
+    }
 
 }
