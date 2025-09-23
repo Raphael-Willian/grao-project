@@ -19,5 +19,7 @@ public class DespesasService {
     public Despesas salvar(Despesas despesas) {
         return repository.save(despesas);
     }
-
+    public void deletar(Long despesaId) {
+        repository.deleteById(despesaId);
+    }
 }

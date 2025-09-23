@@ -23,5 +23,8 @@ public class DespesasController {
     public Despesas adicionar(@RequestBody Despesas despesas) {
         return despesasService.salvar(despesas);
     }
-
+    @DeleteMapping("/{despesaId}")
+    public void deletarDespesa(@PathVariable Long despesaId) {
+        despesasService.deletar(despesaId);
+    }
 }
