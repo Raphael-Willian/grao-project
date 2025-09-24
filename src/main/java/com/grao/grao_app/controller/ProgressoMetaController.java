@@ -22,7 +22,10 @@ public class ProgressoMetaController {
 
         ProgressoMeta novoProgresso = progressoMetaService.adicionarProgresso(metaId, progressoMeta);
         return ResponseEntity.ok(novoProgresso);
-
+    }
+    @DeleteMapping("/{progressoId}/progresso")
+    public void deletarProgresso(@PathVariable Long progressoId) {
+        progressoMetaService.deletar(progressoId);
     }
 
 

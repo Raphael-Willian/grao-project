@@ -36,5 +36,8 @@ public class ProgressoMetaService {
 
         return salvo;
     }
+    public void deletar(Long progressoId) {
+        progressoMetaRepository.deleteById(progressoId);
+    }
 
 }
