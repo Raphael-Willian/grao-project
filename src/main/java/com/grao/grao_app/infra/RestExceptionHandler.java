@@ -69,4 +69,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> categoryAlreadyExistsException(CategoryAlreadyExistsException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Já existe uma categoria com este nome.");
     }
+    @ExceptionHandler(InvalidGoalException.class)
+    private ResponseEntity<String> invalidGoalException(InvalidGoalException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A meta informada é inválida.");
+    }
+    @ExceptionHandler(MalformedRequestException.class)
+    private ResponseEntity<String> malformedRequestException(MalformedRequestException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A requisição enviada está mal formatada.");
+    }
 }
