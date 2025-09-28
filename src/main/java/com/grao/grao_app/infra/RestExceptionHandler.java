@@ -53,4 +53,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> invalidAmountException(InvalidAmountException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O valor deve ser maior que zero.");
     }
+    @ExceptionHandler(InvalidDateException.class)
+    private ResponseEntity<String> invalidDateException(InvalidDateException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data informada é inválida.");
+    }
+    @ExceptionHandler(CategoryNotFoundException.class)
+    private ResponseEntity<String> categoryNotFoundException(CategoryNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada.");
+    }
 }
