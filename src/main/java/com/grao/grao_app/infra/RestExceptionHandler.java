@@ -1,5 +1,7 @@
 package com.grao.grao_app.infra;
 
+import jakarta.persistence.ElementCollection;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -92,5 +94,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DuplicateTransactionException.class)
     private ResponseEntity<String> duplicateTransactionException(DuplicateTransactionException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Essa transação já foi registrada.");
+    }
+    @ExceptionHandler(InsufficientBalanceException.class)
+    private ResponseEntity<String> insufficientBalanceException(InsufficientBalanceException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Saldo insuficiente para concluir a operação.");
+    }
+    @ExceptionHandler(OperationNotAllowedException.class)
+    private ResponseEntity<String> operationnotAllowedException(OperationNotAllowedException exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Não é permitido alterar transações já consolidadas.");
     }
 }
