@@ -85,4 +85,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> invalidFieldTypeException(InvalidFieldTypeException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O campo 'valor' deve ser numérico.");
     }
+    @ExceptionHandler(EndpointNotFoundException.class)
+    private ResponseEntity<String> endpointNotFoundException(EndpointNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O recurso solicitado não existe.");
+    }
+    @ExceptionHandler(DuplicateTransactionException.class)
+    private ResponseEntity<String> duplicateTransactionException(DuplicateTransactionException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Essa transação já foi registrada.");
+    }
 }
