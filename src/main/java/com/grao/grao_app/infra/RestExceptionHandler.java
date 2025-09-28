@@ -61,4 +61,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> categoryNotFoundException(CategoryNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria não encontrada.");
     }
+    @ExceptionHandler(BalanceExceededException.class)
+    private ResponseEntity<String> balanceExceededException(BalanceExceededException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("O valor excede o limite disponível.");
+    }
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    private ResponseEntity<String> categoryAlreadyExistsException(CategoryAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Já existe uma categoria com este nome.");
+    }
 }
