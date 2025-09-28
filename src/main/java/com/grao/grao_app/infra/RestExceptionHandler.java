@@ -19,4 +19,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> invalidTokenException(InvalidTokenException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("O token fornecido é inválido.");
     }
+    @ExceptionHandler(ExpiredTokenException.class)
+    private ResponseEntity<String> expiredTokenException(ExpiredTokenException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("A sessão expirou. Faça login novamente.");
+    }
+    @ExceptionHandler(InvalidTokenException.class)
+    private ResponseEntity<String> invalidCredentialsException(InvalidCredentialsException exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("E-mail ou senha incorretos.");
+    }
 }
