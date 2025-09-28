@@ -27,4 +27,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> invalidCredentialsException(InvalidCredentialsException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("E-mail ou senha incorretos.");
     }
+    @ExceptionHandler(AccessDeniedException.class)
+    private ResponseEntity<String> accessDeniedException(AccessDeniedException exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Você não tem permissão para acessar este recurso.");
+    }
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    private ResponseEntity<String> userAlreadyExistsException(UserAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Já existe um usuário cadastrado com este e-mail.");
+    }
 }
