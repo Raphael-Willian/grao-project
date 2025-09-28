@@ -77,4 +77,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> malformedRequestException(MalformedRequestException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A requisição enviada está mal formatada.");
     }
+    @ExceptionHandler(MissingFieldException.class)
+    private ResponseEntity<String> missingFieldException(MissingFieldException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O campo obrigatório 'valor' não foi informado.");
+    }
+    @ExceptionHandler(InvalidFieldTypeException.class)
+    private ResponseEntity<String> invalidFieldTypeException(InvalidFieldTypeException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O campo 'valor' deve ser numérico.");
+    }
 }
