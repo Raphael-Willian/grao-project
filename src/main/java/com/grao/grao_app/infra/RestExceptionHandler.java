@@ -23,7 +23,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> expiredTokenException(ExpiredTokenException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("A sessão expirou. Faça login novamente.");
     }
-    @ExceptionHandler(InvalidTokenException.class)
+    @ExceptionHandler(InvalidCredentialsException.class)
     private ResponseEntity<String> invalidCredentialsException(InvalidCredentialsException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("E-mail ou senha incorretos.");
     }
@@ -34,5 +34,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserAlreadyExistsException.class)
     private ResponseEntity<String> userAlreadyExistsException(UserAlreadyExistsException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Já existe um usuário cadastrado com este e-mail.");
+    }
+    @ExceptionHandler(UserNotFoundException.class)
+    private ResponseEntity<String> userNotFoundException(UserNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+    }
+    @ExceptionHandler(InvalidPasswordException.class)
+    private ResponseEntity<String> invalidPasswordException(InvalidPasswordException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A senha não atende aos requisitos mínimos de segurança.");
     }
 }
