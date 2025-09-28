@@ -103,4 +103,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> operationnotAllowedException(OperationNotAllowedException exception) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Não é permitido alterar transações já consolidadas.");
     }
+    @ExceptionHandler(ExternalTimeoutException.class)
+    private ResponseEntity<String> externalTimeoutException(ExternalTimeoutException exception) {
+        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body("O serviço externo demorou a responder.");
+    }
+    @ExceptionHandler(DatabaseUnavailableException.class)
+    private ResponseEntity<String> databaseUnvaliableException(DatabaseUnavailableException exception) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Serviço temporariamente indisponível.");
+    }
+    @ExceptionHandler(InternalErrorException.class)
+    private ResponseEntity<String> internalErrorException(InternalErrorException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+    }
 }
