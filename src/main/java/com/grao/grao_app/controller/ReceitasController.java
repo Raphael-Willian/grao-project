@@ -1,7 +1,11 @@
 package com.grao.grao_app.controller;
 
 import java.util.List;
+
+import com.grao.grao_app.dto.ReceitasRequestDTO;
+import com.grao.grao_app.dto.ReceitasResponseDTO;
 import com.grao.grao_app.service.ReceitasService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.grao.grao_app.model.Receitas;
 
@@ -16,12 +20,14 @@ public class ReceitasController {
     }
 
     @GetMapping
-    public List<Receitas> listar() {
-        return receitasService.listarReceitas();
+    public ResponseEntity<List<ReceitasResponseDTO>> listar() {
+        List<ReceitasResponseDTO> receitas = receitasService.listarReceitas();
+        return ResponseEntity.ok(receitas);
     }
     @PostMapping
-    public Receitas adicionar(@RequestBody Receitas receitas) {
-        return receitasService.adicionar(receitas);
+    public ResponseEntity<ReceitasResponseDTO> adicionar(@RequestBody ReceitasRequestDTO dto) {
+        ReceitasResponseDTO receitaCriada = receitasService.adicionar(dto);
+        return ResponseEntity.ok(receitaCriada);
     }
     @DeleteMapping("/{receitaId}")
     public void deletarReceita(@PathVariable Long receitaId) {

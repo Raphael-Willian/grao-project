@@ -1,7 +1,5 @@
 package com.grao.grao_app.infra;
 
-import jakarta.persistence.ElementCollection;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

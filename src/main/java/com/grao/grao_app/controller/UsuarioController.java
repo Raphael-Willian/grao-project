@@ -1,9 +1,10 @@
 package com.grao.grao_app.controller;
 
-import com.grao.grao_app.repository.UsuarioRepository;
+import com.grao.grao_app.dto.UsuarioRequestDTO;
+import com.grao.grao_app.dto.UsuarioResponseDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import com.grao.grao_app.model.Usuario;
 import com.grao.grao_app.service.UsuarioService;
 
 @RestController
@@ -16,12 +17,13 @@ public class UsuarioController {
         this.service = service;
     }
     @GetMapping
-    public List<Usuario> listar() {
-        return service.listarUsuarios();
+    public ResponseEntity<List<UsuarioResponseDTO>> listar() {
+        List<UsuarioResponseDTO> usuarios = service.listarUsuarios();
+        return ResponseEntity.ok(usuarios);
     }
     @PostMapping
-    public Usuario criar(@RequestBody Usuario usuario) {
-        return service.salvar(usuario);
+    public ResponseEntity<UsuarioResponseDTO> criar(@RequestBody UsuarioRequestDTO dto) {
+        UsuarioResponseDTO usuarioCriado = service.salvar(dto);
+        return ResponseEntity.ok(usuarioCriado);
     }
-
 }

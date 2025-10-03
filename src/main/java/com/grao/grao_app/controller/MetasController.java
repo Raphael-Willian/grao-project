@@ -1,9 +1,12 @@
 package com.grao.grao_app.controller;
 
 import java.util.List;
+
+import com.grao.grao_app.dto.MetasRequestDTO;
+import com.grao.grao_app.dto.MetasResponseDTO;
 import com.grao.grao_app.service.MetasService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.grao.grao_app.model.Metas;
 
 @RestController
 @RequestMapping("/metas")
@@ -16,14 +19,17 @@ public class MetasController {
     }
 
     @GetMapping
-    public List<Metas> listar() {
-        return metasService.listarMetas();
+    public ResponseEntity<List<MetasResponseDTO>> listar() {
+        List<MetasResponseDTO> metas = metasService.listarMetas();
+        return ResponseEntity.ok(metas);
     }
 
     @PostMapping
-    public Metas salvar(@RequestBody Metas metas) {
-        return metasService.adicionarMetas(metas);
+    public ResponseEntity<MetasResponseDTO> salvar(@RequestBody MetasRequestDTO dto) {
+        MetasResponseDTO meta = metasService.adicionarMetas(dto);
+        return ResponseEntity.ok(meta);
     }
+
     @DeleteMapping("/{metaId}")
     public void deletarMeta(@PathVariable Long metaId) {
         metasService.deletar(metaId);

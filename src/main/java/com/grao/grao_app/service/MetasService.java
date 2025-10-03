@@ -1,6 +1,9 @@
 package com.grao.grao_app.service;
 
 import java.util.List;
+
+import com.grao.grao_app.dto.MetasRequestDTO;
+import com.grao.grao_app.dto.MetasResponseDTO;
 import com.grao.grao_app.model.Metas;
 import com.grao.grao_app.repository.MetasRepository;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,32 @@ public class MetasService {
     public MetasService(MetasRepository metasRepository) {
         this.metasRepository = metasRepository;
     }
-    public List<Metas> listarMetas() {
-        return metasRepository.findAll();
+    public List<MetasResponseDTO> listarMetas() {
+        List<Metas> metas = metasRepository.findAll();
+
+        List<MetasResponseDTO> metasDTO = metas.stream()
+                .map(MetasResponseDTO::new)
+                .toList();
+        return metasDTO;
+
     }
-    public Metas adicionarMetas(Metas metas) {
-        return metasRepository.save(metas);
+    public MetasResponseDTO adicionarMetas(MetasRequestDTO dto) {
+
+        Metas novaMeta = new Metas();
+        novaMeta.setValor_atual(dto.getValor_atual());
+        novaMeta.setTitulo(dto.getTitulo());
+        novaMeta.setDescricao(dto.getDescricao());
+        novaMeta.setValor_objetivo(dto.getValor_objetivo());
+        novaMeta.setPrazo(dto.getPrazo());
+        novaMeta.setStatus(dto.getStatus());
+        novaMeta.setCategoria(dto.getCategoria());
+        novaMeta.setData_criacao(dto.getData_criacao());
+        novaMeta.setData_conclusao(dto.getData_conclusao());
+
+        Metas salvo = metasRepository.save(novaMeta);
+
+        return new MetasResponseDTO(salvo);
+
     }
     public void deletar(Long metaId) {
         metasRepository.deleteById(metaId);
