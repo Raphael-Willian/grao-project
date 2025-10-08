@@ -1,6 +1,7 @@
 package com.grao.grao_app.service;
 
 
+import com.grao.grao_app.exceptions.EventNotFoundException;
 import com.grao.grao_app.model.Metas;
 import com.grao.grao_app.model.ProgressoMeta;
 import com.grao.grao_app.repository.MetasRepository;
@@ -21,7 +22,7 @@ public class ProgressoMetaService {
     }
 
     public ProgressoMeta adicionarProgresso(Long metaId, ProgressoMeta progressoMeta) {
-        Metas meta = metasRepository.findById(metaId).orElseThrow(() -> new RuntimeException("Meta não encontrada"));
+        Metas meta = metasRepository.findById(metaId).orElseThrow(() -> new EventNotFoundException("Meta não encontrada"));
         progressoMeta.setMetas(meta);
         ProgressoMeta salvo = progressoMetaRepository.save(progressoMeta);
 

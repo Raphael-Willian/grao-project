@@ -1,5 +1,7 @@
 package com.grao.grao_app.infra;
 
+import com.grao.grao_app.dto.ErrorResponseDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,8 +13,16 @@ import com.grao.grao_app.exceptions.*;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EventNotFoundException.class)
-    private ResponseEntity<String> eventNotFoundHandler(EventNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Event Not Found.");
+    private ResponseEntity<ErrorResponseDTO> eventNotFoundHandler(
+            EventNotFoundException exception,
+            HttpServletRequest request) {
+        ErrorResponseDTO body = new ErrorResponseDTO(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                "Event Not Found.",
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
     //Exceptions Autorização e Autenticação
     @ExceptionHandler(InvalidTokenException.class)

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS despesas (
+    id PRIMARY KEY UNIQUE NOT NULL,
+    valor DECIMAL NOT NULL,
+    data DATE,
+    descricao TEXT NOT NULL,
+    usuario FOREIGN KEY NOT NULL
+)

@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS receias (
+    id PRIMARY KEY UNIQUE NOT NULL,
+    valor DECIMAL NOT NULL,
+    descricao TEXT NOT NULL,
+    usuario FOREIGN KEY NOT NULL
+)

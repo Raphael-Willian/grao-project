@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.grao.grao_app.dto.DesafiosRequestDTO;
 import com.grao.grao_app.dto.DesafiosResponseDTO;
+import com.grao.grao_app.exceptions.EventNotFoundException;
 import com.grao.grao_app.model.Desafios;
 import com.grao.grao_app.repository.DesafiosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,22 @@ public class DesafiosService {
 
         List<Desafios> desafios = desafiosRepository.findAll();
 
+        if (desafios.isEmpty()) {
+            throw new EventNotFoundException("Desafios não encontrados.");
+        }
+
         List<DesafiosResponseDTO> desafiosDTO = desafios.stream()
                 .map(DesafiosResponseDTO::new)
                 .toList();
         return desafiosDTO;
 
+    }
+
+    public DesafiosResponseDTO listarPeloId(Long id) {
+        Desafios desafio = desafiosRepository.findById(id)
+                .orElseThrow(() -> new EventNotFoundException("Desafio não encontrado."));
+
+        return new DesafiosResponseDTO(desafio);
     }
     public void deletar(Long desafioId) {
         desafiosRepository.deleteById(desafioId);

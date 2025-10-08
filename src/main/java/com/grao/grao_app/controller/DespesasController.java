@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.grao.grao_app.dto.DespesasRequestDTO;
 import com.grao.grao_app.dto.DespesasResponseDTO;
-import com.grao.grao_app.model.Despesas;
 import com.grao.grao_app.service.DespesasService;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +24,13 @@ public class DespesasController {
         List<DespesasResponseDTO> despesas = despesasService.listarDespesas();
         return ResponseEntity.ok(despesas);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DespesasResponseDTO> listarPeloId(@PathVariable Long id) {
+        DespesasResponseDTO despesaId = despesasService.despesaPeloId(id);
+        return ResponseEntity.ok(despesaId);
+    }
+
     @PostMapping
     public ResponseEntity<DespesasResponseDTO> adicionar(@RequestBody DespesasRequestDTO despesas) {
         DespesasResponseDTO despesaCriar = despesasService.salvar(despesas);

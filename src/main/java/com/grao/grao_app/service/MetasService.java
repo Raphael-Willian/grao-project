@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.grao.grao_app.dto.MetasRequestDTO;
 import com.grao.grao_app.dto.MetasResponseDTO;
+import com.grao.grao_app.exceptions.EventNotFoundException;
 import com.grao.grao_app.model.Metas;
 import com.grao.grao_app.repository.MetasRepository;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,23 @@ public class MetasService {
     public List<MetasResponseDTO> listarMetas() {
         List<Metas> metas = metasRepository.findAll();
 
+        if (metas.isEmpty()) {
+            throw new EventNotFoundException("Nenhuma meta encontrada.");
+        }
+
         List<MetasResponseDTO> metasDTO = metas.stream()
                 .map(MetasResponseDTO::new)
                 .toList();
         return metasDTO;
-
     }
+
+    public MetasResponseDTO listarMetaId(Long id) {
+        Metas meta = metasRepository.findById(id)
+                .orElseThrow(EventNotFoundException::new);
+
+        return new MetasResponseDTO(meta);
+    }
+
     public MetasResponseDTO adicionarMetas(MetasRequestDTO dto) {
 
         Metas novaMeta = new Metas();

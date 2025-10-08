@@ -3,6 +3,7 @@ package com.grao.grao_app.service;
 import java.util.List;
 import com.grao.grao_app.dto.ReceitasRequestDTO;
 import com.grao.grao_app.dto.ReceitasResponseDTO;
+import com.grao.grao_app.exceptions.EventNotFoundException;
 import com.grao.grao_app.model.Receitas;
 import com.grao.grao_app.repository.ReceitasRepository;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,23 @@ public class ReceitasService {
 
         List<Receitas> receitas = receitasRepository.findAll();
 
+        if (receitas.isEmpty()) {
+            throw new EventNotFoundException("Nenhuma Receita Encontrada.");
+        }
+
         List<ReceitasResponseDTO> receitasDTO = receitas.stream()
                 .map(ReceitasResponseDTO::new)
                 .toList();
 
         return receitasDTO;
+
+    }
+    public ReceitasResponseDTO listarPeloId(Long id) {
+
+        Receitas receitas = receitasRepository.findById(id)
+                .orElseThrow(EventNotFoundException::new);
+
+        return new ReceitasResponseDTO(receitas);
 
     }
     public ReceitasResponseDTO adicionar(ReceitasRequestDTO dto) {

@@ -33,6 +33,12 @@ public class DesafiosController {
         return ResponseEntity.ok(desafios);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DesafiosResponseDTO> desafioPeloId(@PathVariable Long id) {
+        DesafiosResponseDTO desafio = desafiosService.listarPeloId(id);
+        return ResponseEntity.ok(desafio);
+    }
+
     @DeleteMapping("/{desafioId}")
     public void deletarDesafios(@PathVariable Long desafioId) {
         desafiosService.deletar(desafioId);

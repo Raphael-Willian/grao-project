@@ -24,6 +24,12 @@ public class MetasController {
         return ResponseEntity.ok(metas);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<MetasResponseDTO> listarPeloId(@PathVariable Long id) {
+        MetasResponseDTO metaId = metasService.listarMetaId(id);
+        return ResponseEntity.ok(metaId);
+    }
+
     @PostMapping
     public ResponseEntity<MetasResponseDTO> salvar(@RequestBody MetasRequestDTO dto) {
         MetasResponseDTO meta = metasService.adicionarMetas(dto);

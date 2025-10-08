@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.grao.grao_app.dto.ReceitasRequestDTO;
 import com.grao.grao_app.dto.ReceitasResponseDTO;
+import com.grao.grao_app.exceptions.EventNotFoundException;
 import com.grao.grao_app.service.ReceitasService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,11 @@ public class ReceitasController {
     @GetMapping
     public ResponseEntity<List<ReceitasResponseDTO>> listar() {
         List<ReceitasResponseDTO> receitas = receitasService.listarReceitas();
+        return ResponseEntity.ok(receitas);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ReceitasResponseDTO> listarPeloId(@PathVariable Long id) {
+        ReceitasResponseDTO receitas = receitasService.listarPeloId(id);
         return ResponseEntity.ok(receitas);
     }
     @PostMapping

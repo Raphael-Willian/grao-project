@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.grao.grao_app.dto.DespesasRequestDTO;
 import com.grao.grao_app.dto.DespesasResponseDTO;
+import com.grao.grao_app.exceptions.EventNotFoundException;
 import com.grao.grao_app.repository.DespesasRepository;
 import com.grao.grao_app.model.Despesas;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,23 @@ public class DespesasService {
 
         List<Despesas> despesas = repository.findAll();
 
+        if (despesas.isEmpty()) {
+            throw new EventNotFoundException("Despesas não encontradas.");
+        }
+
         List<DespesasResponseDTO> despesasDTO = despesas.stream()
                 .map(DespesasResponseDTO::new)
                 .toList();
         return despesasDTO;
     }
+
+    public DespesasResponseDTO despesaPeloId(Long id) {
+        Despesas despesaId = repository.findById(id)
+                .orElseThrow(EventNotFoundException::new);
+
+        return new DespesasResponseDTO(despesaId);
+    }
+
     public DespesasResponseDTO salvar(DespesasRequestDTO dto) {
 
         Despesas despesas = new Despesas();

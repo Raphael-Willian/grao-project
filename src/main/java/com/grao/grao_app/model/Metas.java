@@ -27,8 +27,8 @@ public class Metas {
     private LocalDateTime data_criacao;
     private LocalDate data_conclusao;
 
-        @OneToMany(mappedBy = "meta", cascade = CascadeType.ALL, orphanRemoval = true)
-        private List<ProgressoMeta> progressoMeta;
+    @OneToMany(mappedBy = "meta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProgressoMeta> progressoMeta;
 
     public List<ProgressoMeta> getProgressoMeta() {
         return progressoMeta;
