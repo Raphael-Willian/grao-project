@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS receias (
-    id PRIMARY KEY UNIQUE NOT NULL,
-    valor DECIMAL NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
     descricao TEXT NOT NULL,
-    usuario FOREIGN KEY NOT NULL
-)
+    usuario INTEGER NOT NULL,
+    CONSTRAINT fk_usuario FOREIGN KEY (usuario) REFERENCES users(id) ON DELETE CASCADE
+);
