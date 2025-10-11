@@ -2,6 +2,7 @@ package com.grao.grao_app.service;
 
 import com.grao.grao_app.dto.UsuarioRequestDTO;
 import com.grao.grao_app.dto.UsuarioResponseDTO;
+import com.grao.grao_app.enums.UserRole;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.grao.grao_app.model.Usuario;
@@ -27,13 +28,8 @@ public class UsuarioService {
 
     }
     public UsuarioResponseDTO salvar(UsuarioRequestDTO dto) {
-        Usuario usuario = new Usuario();
-        usuario.setNome(dto.getNome());
-        usuario.setEmail(dto.getEmail());
-
+        Usuario usuario = new Usuario(dto.getNome(),dto.getEmail(), UserRole.USER, dto.getPassword());
         Usuario salvo = repository.save(usuario);
-
         return new UsuarioResponseDTO(salvo);
     }
-
 }
