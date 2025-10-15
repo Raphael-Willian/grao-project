@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/metas")
+@RequestMapping("/api/v1/metas")
 public class ProgressoMetaController {
 
     private final ProgressoMetaService progressoMetaService;

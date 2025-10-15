@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.grao.grao_app.model.Receitas;
 
 @RestController
-@RequestMapping("/receitas")
+@RequestMapping("/api/v1/receitas")
 public class ReceitasController {
 
     private final ReceitasService receitasService;

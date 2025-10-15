@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/desafios")
+@RequestMapping("/api/v1/desafios")
 public class DesafiosController {
 
     @Autowired
